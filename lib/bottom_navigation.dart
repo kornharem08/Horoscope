@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 
 class BottomNavigationWidget extends StatefulWidget {
   final int currentIndex;
@@ -18,53 +19,65 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-      decoration: BoxDecoration(
-        color: Colors.white,
+      margin: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+      child: ClipRRect(
         borderRadius: BorderRadius.circular(30),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 5),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.8),
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.2),
+                width: 1,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 20,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildNavItem(
+                  icon: Icons.home_outlined,
+                  activeIcon: Icons.home_rounded,
+                  label: 'หน้าแรก',
+                  index: 0,
+                ),
+                _buildNavItem(
+                  icon: Icons.auto_awesome_outlined,
+                  activeIcon: Icons.auto_awesome,
+                  label: 'ดูดวง',
+                  index: 1,
+                ),
+                _buildNavItem(
+                  icon: Icons.map_outlined,
+                  activeIcon: Icons.map,
+                  label: 'แผนที่',
+                  index: 2,
+                ),
+                _buildNavItem(
+                  icon: Icons.forum_outlined,
+                  activeIcon: Icons.forum,
+                  label: 'ชุมชน',
+                  index: 3,
+                ),
+                _buildNavItem(
+                  icon: Icons.account_circle_outlined,
+                  activeIcon: Icons.account_circle,
+                  label: 'โปรไฟล์',
+                  index: 4,
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _buildNavItem(
-            icon: Icons.home_outlined,
-            activeIcon: Icons.home_rounded,
-            label: 'หน้าแรก',
-            index: 0,
-          ),
-          _buildNavItem(
-            icon: Icons.auto_awesome_outlined,
-            activeIcon: Icons.auto_awesome,
-            label: 'ดูดวง',
-            index: 1,
-          ),
-          _buildNavItem(
-            icon: Icons.psychology_outlined,
-            activeIcon: Icons.psychology,
-            label: 'คำแนะนำ',
-            index: 2,
-          ),
-          _buildNavItem(
-            icon: Icons.forum_outlined,
-            activeIcon: Icons.forum,
-            label: 'ชุมชน',
-            index: 3,
-          ),
-          _buildNavItem(
-            icon: Icons.account_circle_outlined,
-            activeIcon: Icons.account_circle,
-            label: 'โปรไฟล์',
-            index: 4,
-          ),
-        ],
+        ),
       ),
     );
   }

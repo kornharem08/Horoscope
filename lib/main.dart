@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'bottom_navigation.dart';
 import 'pages/home_page.dart';
 import 'pages/horoscope_page.dart';
-import 'pages/guidance_page.dart';
+import 'pages/map_page.dart';
 import 'pages/community_page.dart';
 import 'pages/profile_page.dart';
 
@@ -42,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     const HomePage(),
     const HoroscopePage(),
-    const GuidancePage(),
+    const MapPage(),
     const CommunityPage(),
     const ProfilePage(),
   ];
@@ -56,6 +56,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationWidget(
         currentIndex: _currentIndex,
